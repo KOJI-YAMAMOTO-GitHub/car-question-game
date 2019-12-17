@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>くるまクイズ</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="">
+    <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+    <audio id="sound-file-ok" preload="auto">
+        <source src="https://soundeffect-lab.info/sound/anime/mp3/correct1.mp3" type="audio/mp3"></audio>
+    <audio id="sound-file-ng" preload="auto">
+        <source src="https://soundeffect-lab.info/sound/anime/mp3/incorrect1.mp3" type="audio/mp3"></audio>
+    <style type="text/css">
+        body {
+            text-align: center;
+            font-family: "Nico Moji";
+        }
+
+        #title {
+            color: #FF8C00;
+            /*非対応のブラウザでの文字色を設定*/
+            background: -webkit-linear-gradient(0deg, rgb(249, 251, 251), rgb(238, 255, 0), rgb(251, 0, 176));
+            /*背景色にグラデーションを指定*/
+            -webkit-background-clip: text;
+            /*テキストでくり抜く*/
+            -webkit-text-fill-color: transparent;
+            /*くり抜いた部分は背景を表示*/
+            font-size: 8vw;
+            margin: 5px;
+        }
+
+        #question {
+            color: rgb(3, 39, 243);
+        }
+
+        #btn {
+            width: 30vw;
+            height: 30px;
+            display: inline-block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            background: #668ad8;
+            /*ボタン色*/
+            color: #FFF;
+            border-bottom: solid 4px #627295;
+            border-radius: 3px;
+        }
+
+        #btn:active {
+            /*ボタンを押したとき*/
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+            /*下に動く*/
+            box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+            /*影を小さく*/
+            border-bottom: none;
+        }
+
+        #car-ul {
+            list-style: none;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-around;
+            justify-content: space-around;
+            width: 90%;
+            flex-wrap:wrap;
+
+            animation-name: fade-in3;
+            animation-duration: 2s;
+            animation-timing-function: ease-out;
+            animation-delay: 1s;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+        }
+
+        img {
+            width: 10vw;
+            margin: auto;
+            margin-top: 10px;
+            border: 5px solid whitesmoke;
+            border-radius: 5px;
+        }
+
+        @keyframes fade-in3 {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 20px, 0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @media screen and (min-width: 767px) {
+            /*PC用*/
+        }
+
+        @media screen and (max-width: 767px) {
+            /*タブレット用*/
+        }
+
+        @media screen and (max-width: 479px) {
+            /*スマホ用*/
+            #car-ul {
+                list-style: none;
+                display: -webkit-flex;
+                display: block;
+                -webkit-justify-content: space-around;
+                justify-content: space-around;
+            }
+
+            .img {
+                height: 50vh;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+
+        var car_array = [
+            'bus,バス,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/020.jpg',
+         'bike,バイク,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/036.jpg',
+        'garbage_wagon,ごみ収集車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/045.jpg',
+        'taxi,タクシー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/051.jpg',
+        'police_car,パトカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/105.jpg',
+        'fire_truck,消防車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/108.jpg',
+        'crane_truck,クレーン車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/073.jpg',
+        'truck,トラック,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/085.jpg',
+        'tank_truck,タンクローリー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/090.jpg',
+        'ambulance,救急車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/079.jpg',
+        'tractor,トラクター,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/083.jpg',
+        'helicopter,ヘリコプター,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/097.jpg',
+        'dump_truck,ダンプカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/101.jpg',
+        'police motorcycle,白バイ,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/004.jpg',
+        'digger,ショベルカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/009.jpg'
+         ];
+        var answer_car = ""
+
+
+        function check(value) {
+            if (answer_car === value) {
+                document.getElementById('sound-file-ok').play();
+            } else {
+                document.getElementById('sound-file-ng').play();
+            }
+        }
+
+        function change() {
+
+            //質問を初期化
+            var element_question = document.getElementById("question");
+            if (element_question) {
+                element_question.parentNode.removeChild(element_question);
+            }
+
+            //初期化
+            var elems_car = document.getElementsByClassName("car");
+            var len = elems_car.length;
+            for (var i = 0; i < len; i++) {
+                var e = elems_car[0];
+                e.parentNode.removeChild(e);
+            }
+
+            //配列をランダムに入れ替え
+            for (var i = car_array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = car_array[i];
+                car_array[i] = car_array[j];
+                car_array[j] = tmp;
+            }
+
+            for (var k = 0; k < car_array.length; k++) {
+
+                //色配列を分割
+                var car_array_split = car_array[k].split(',');
+                var car = car_array_split[0];
+                var car_name = car_array_split[1];
+                var car_img_url = car_array_split[2];
+
+                //色表示タグ追加
+                var element = document.getElementById('car-ul');
+                element.insertAdjacentHTML('beforeend', '<li><img class="car" src="' + car_img_url + '" alt="' + car_name + '" onclick="check(\'' + car + '\')"></li>');
+
+            }
+            //色を指定
+            var arrayIndex = Math.floor(Math.random() * car_array.length);
+            var question_car = car_array[arrayIndex];
+            answer_car = question_car.split(',')[0];
+            var answer_car_name = question_car.split(',')[1];
+            var element = document.getElementById('btn');
+            element.insertAdjacentHTML('afterend', '<h2 id="question">' + answer_car_name + 'はどれかな？</h2>');
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="title">くるまクイズ</h1>
+    <p id="btn" onclick="change()">つぎは、どのクルマにしようかな？</p>
+    <ul id="car-ul"></ul>
+</body>
+
+</html>
