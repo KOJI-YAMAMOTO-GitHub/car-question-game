@@ -207,6 +207,10 @@
             var answer_car_name = question_car.split(',')[1];
             var element = document.getElementById('btn');
             element.insertAdjacentHTML('afterend', '<h2 id="question">' + answer_car_name + 'はどれかな？</h2>');
+            var speak = new SpeechSynthesisUtterance();
+            speak.text = "red";
+            //speak.lang = 'en-US';
+            speechSynthesis.speak(speak);
         }
     </script>
 </head>
