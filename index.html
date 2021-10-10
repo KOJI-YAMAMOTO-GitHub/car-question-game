@@ -210,7 +210,7 @@
             
             //音声読み上げ
             var speak = new SpeechSynthesisUtterance();
-            speak.text = answer_car_name;
+            speak.text = answer_car_name + "はどれかな？";
             //speak.lang = 'en-US';
             speechSynthesis.speak(speak);
         }
