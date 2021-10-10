@@ -194,7 +194,6 @@
                 var car = car_array_split[0];
                 var car_name = car_array_split[1];
                 var car_img_url = car_array_split[2];
-                var car_speak = car_array_split[3];
                 
 
                 //色表示タグ追加
@@ -207,12 +206,13 @@
             var question_car = car_array[arrayIndex];
             answer_car = question_car.split(',')[0];
             var answer_car_name = question_car.split(',')[1];
+            var answer_car_speak = question_car.split(',')[3];
             var element = document.getElementById('btn');
             element.insertAdjacentHTML('afterend', '<h2 id="question">' + answer_car_name + 'はどれかな？</h2>');
             
             //音声読み上げ
             var speak = new SpeechSynthesisUtterance();
-            speak.text = car_speak + "はどれかな？";
+            speak.text = answer_car_speak + "はどれかな？";
             //speak.lang = 'en-US';
             speechSynthesis.speak(speak);
         }
