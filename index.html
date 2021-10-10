@@ -136,21 +136,21 @@
     <script type="text/javascript">
 
         var car_array = [
-            'bus,バス,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/020.jpg',
-         'bike,バイク,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/036.jpg',
-        'garbage_wagon,ごみ収集車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/045.jpg',
-        'taxi,タクシー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/051.jpg',
-        'police_car,パトカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/105.jpg',
-        'fire_truck,消防車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/108.jpg',
-        'crane_truck,クレーン車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/073.jpg',
-        'truck,トラック,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/085.jpg',
-        'tank_truck,タンクローリー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/090.jpg',
-        'ambulance,救急車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/079.jpg',
-        'tractor,トラクター,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/083.jpg',
-        'helicopter,ヘリコプター,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/097.jpg',
-        'dump_truck,ダンプカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/101.jpg',
-        'police motorcycle,白バイ,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/004.jpg',
-        'digger,ショベルカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/009.jpg'
+            'bus,バス,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/020.jpg,ばす',
+         'bike,バイク,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/019.jpg,ばいく',
+        'garbage_wagon,ごみ収集車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/045.jpg,ごみしゅうしゅうしゃ',
+        'taxi,タクシー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/051.jpg,たくしー',
+        'police_car,パトカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/105.jpg,ぱとかー',
+        'fire_truck,消防車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/108.jpg,しょうぼうしゃ',
+        'crane_truck,クレーン車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/073.jpg,くれーんしゃ',
+        'truck,トラック,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/085.jpg,とらっく',
+        'tank_truck,タンクローリー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/090.jpg,たんくろーりー',
+        'ambulance,救急車,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/079.jpg,きゅうきゅうしゃ',
+        'tractor,トラクター,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/083.jpg,とらくたー',
+        'helicopter,ヘリコプター,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/097.jpg,へりこぷたー',
+        'dump_truck,ダンプカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/101.jpg,だんぷかー',
+        'police motorcycle,白バイ,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/004.jpg,しろばい',
+        'digger,ショベルカー,https://www.takaratomy.co.jp/products/tomica/lineup/regular/images/009.jpg,しょべるかー'
          ];
         var answer_car = ""
 
@@ -194,6 +194,8 @@
                 var car = car_array_split[0];
                 var car_name = car_array_split[1];
                 var car_img_url = car_array_split[2];
+                var car_speak = car_array_split[3];
+                
 
                 //色表示タグ追加
                 var element = document.getElementById('car-ul');
@@ -210,7 +212,7 @@
             
             //音声読み上げ
             var speak = new SpeechSynthesisUtterance();
-            speak.text = answer_car_name + "はどれかな？";
+            speak.text = car_speak + "はどれかな？";
             //speak.lang = 'en-US';
             speechSynthesis.speak(speak);
         }
