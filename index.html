@@ -214,6 +214,7 @@
             var speak = new SpeechSynthesisUtterance();
             speak.text = answer_car_speak + "はどれかな？";
             //speak.lang = 'en-US';
+            speak.voice = window.speechSynthesis.getVoices()[7];
             speechSynthesis.speak(speak);
         }
     </script>
